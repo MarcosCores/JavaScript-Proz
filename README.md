@@ -518,38 +518,115 @@ Obesidade grau II
 **Q2.** Conforme com o que você aprendeu sobre manipulação de datas, faça as contas: quantos dias se passaram da data do seu nascimento até o dia de hoje?
 ```
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    
-    <title>Document</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Dias Vividos</title>
+    <style>
+        /* Reset básico e fonte */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f3f4f7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+            text-align: center;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+        }
+
+        h1 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #4CAF50;
+            font-weight: bold;
+        }
+
+        input, button {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            font-size: 1.1em;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            outline: none;
+        }
+
+        input:focus, button:focus {
+            border-color: #4CAF50;
+        }
+
+        input {
+            background-color: #f7f7f7;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .resultado {
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: #333;
+        }
+    </style>
 </head>
 <body>
+
+    <div class="container">
+        <h1>Calculadora de Dias Vividos</h1>
+        <label for="dataNascimento">Digite sua data de nascimento:</label>
+        <input type="date" id="dataNascimento" required>
+        <button onclick="calcularDiasVividos()">Calcular</button>
+
+        <div id="resultado" class="resultado"></div>
+    </div>
+
     <script>
-        var dataAtual = new Date(); //Objeto Data
-        //O mês começa com zero em Janeiro 0 a 11
-        document.write(dataAtual.getDate() + "/" + (dataAtual.getMonth() + 1) + "/" + dataAtual.getFullYear());
+        function calcularDiasVividos() {
+            var dataNascimento = document.getElementById('dataNascimento').value;
+            if (dataNascimento === "") {
+                document.getElementById('resultado').innerText = "Por favor, insira sua data de nascimento.";
+                return;
+            }
 
-        var meudia = new Date (2007, 9, 5);
+            var dataAtual = new Date();
+            var dataNascimentoFormatada = new Date(dataNascimento);
 
-        var totalDias = (dataAtual.getTime() - meudia.getTime()); //em seg
-        document.write("<br> total de dias: " + totalDias);
+            // Calculando a diferença em milissegundos
+            var diferenca = dataAtual - dataNascimentoFormatada;
+            var diasVividos = Math.floor(diferenca / (1000 * 60 * 60 * 24)); // Convertendo para dias
 
-/*
-        1min = 60s
-        1h = 3600s
-        1d = 86400s 86.400.000 milessegundos
-
-*/
-         var int = 542192652354
-         var int2 = 86400000
-
-         document.write("<br> O número de dias que você viveu é " + Math.ceil(totalDias)/int2)
-
+            // Exibindo o resultado
+            document.getElementById('resultado').innerText = `Você viveu aproximadamente ${diasVividos} dias.`;
+        }
     </script>
+
 </body>
 </html>
-```
 **Q3.** Utilizando a programação Orientada a Objetos, monte um modelo de construção de um sistema de uma das empresas abaixo: 
 * Netflix
 * Ifood
